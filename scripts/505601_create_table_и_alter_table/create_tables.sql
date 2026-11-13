@@ -14,3 +14,11 @@ create table products
 	is_active BOOLEAN not null default true,
 	created_at TIMESTAMPTZ not null default now()
 );
+
+create table orders
+(
+	id BIGINT generated always as identity primary key,
+	user_id BIGINT not null references users (id),
+	status TEXT not null,
+	created_at TIMESTAMPTZ not null default now()
+);

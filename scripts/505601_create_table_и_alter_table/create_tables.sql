@@ -22,3 +22,12 @@ create table orders
 	status TEXT not null,
 	created_at TIMESTAMPTZ not null default now()
 );
+
+create table order_items
+(
+	id BIGINT generated always as identity primary key,
+	order_id BIGINT not null references orders (id),
+	product_id BIGINT not null references products (id),
+	quantity INT not null check (quantity > 0 ),
+	unit_price NUMERIC(12, 2) not null check (unit_price > 0)
+);
